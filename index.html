@@ -1,0 +1,227 @@
+<html lang="he-IL" data-theme="light" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liebe Order Form</title>
+    
+    <link rel="stylesheet" href="css/pico.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;700&display=swap" rel="stylesheet">
+
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <style>
+        [data-theme="light"], :root:not([data-theme="dark"]) {
+            --primary: #6f7a67;
+            --font-family: "Heebo", system-ui,-apple-system,"Segoe UI","Roboto","Ubuntu","Cantarell","Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+        }
+
+        .media-responsive {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .center-block {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #select-color input {
+            border: none;
+            background-color: currentColor;
+        }
+
+        #select-color input:checked {
+            background-color: #fff;
+            border: .35em solid currentColor;
+        }
+
+        [x-cloak] { display: none !important; }
+
+    </style>
+
+</head>
+<body>
+    <main class="container">
+        <h1>
+            טופס פרטים לתעודת לידה
+        </h1>
+        <p>
+            <strong>
+                מזל טוב, קסם חדש נולד!
+            </strong>
+            <br>
+            תעודת לידה מעוצבת בהתאמה אישית לפי טעמכם.
+            <br>
+            רק הכניסו את כל הפרטים של הבייבי שלכם ואנחנו נדאג לכל השאר.
+        </p>
+
+        <form action="">
+            <div class="grid">
+                
+                <label for="name-he">
+                    שם הבייבי (עברית)
+                    <input type="text" id="name-he" name="name-he" placeholder="שם פרטי ומשפחה" required>
+                </label>
+                
+                <label for="name-en">
+                    שם הבייבי (אנגלית)
+                    <input type="text" id="name-en" name="name-en" placeholder="First and Last Name" dir="ltr" required>
+                </label>
+            </div>
+                
+            
+
+            <div class="grid">
+                <label for="meeting-time">
+                    תאריך ושעת לידה
+                    <input type="datetime-local" id="meeting-time" name="meeting-time" value="2018-06-12T19:30" min="2018-06-07T00:00"
+                        max="2018-06-14T00:00" dir="ltr">
+                </label>
+                
+                <label for="weight">
+                    משקל בלידה (ק״ג)
+                    <input type="number" name="weight" id="weight" step="0.01">
+                </label>
+
+                <label for="week">
+                    שבוע הלידה
+                    <input type="text" name="week" id="week">
+                </label>
+            </div>
+
+            <label for="parent1-name">
+                הורה 1
+                <div class="grid">
+                    <input type="text" name="parent1-name" id="parent1-name" placeholder="שם פרטי">
+                    <select name="parent1-gender" id="parent1-gender">
+                        <option value="אמא">אמא</option>
+                        <option value="אבא">אבא</option>
+                    </select>
+                </div>
+            </label>
+
+            <label for="parent2-name">
+                הורה 2
+                <div class="grid">
+                    <input type="text" name="parent2-name" id="parent2-name" placeholder="שם פרטי">
+                    <select name="parent2-gender" id="parent2-gender">
+                        <option value="אמא">אמא</option>
+                        <option value="אבא">אבא</option>
+                    </select>
+                </div>
+            </label>
+
+            <label for="hospital">
+                שם ביה״ח בו נולד הבייבי
+                <input type="text" id="hospital" name="hospital" placeholder="" required>
+            </label>
+
+            <hr>
+
+            <div x-data='{
+                style : "rainbow",
+                color : "teal",
+                colorStyles : {
+                    floral: ["brown", "burgundy", "heather", "mint", "powder", "rust", "sky"],
+                    origami: ["brown", "mint", "mustard", "powder", "sky", "teal"],
+                    rainbow : ["mint", "navy", "powder", "sky", "teal"],
+                },
+                get imageSrc() { 
+                    if (!this.colorStyles[this.style].includes(this.color)) this.color = this.colorStyles[this.style][0];
+                    return this.style + "-" + this.color;
+                },
+                styleHasColor(val) { return this.colorStyles[this.style].includes(val) }
+            }'>
+                <div class="grid">
+                    <div>
+
+                        <label for="select-style">
+                            סגנון מועדף לתעודת הלידה
+                            <select name="select-style" id="select-style" x-model="style">
+                                <option value="rainbow">Rainbow</option>
+                                <option value="floral">Floral</option>
+                                <option value="origami">Origami</option>
+                            </select>
+                        </label>
+                
+                        <fieldset id="select-color">
+                            <legend>
+                                צבע - 
+                                <span x-text="color" style="text-transform: capitalize;"></span>
+                            </legend>
+                            <input type="radio" id="teal" name="color" value="teal" x-model="color" x-show="styleHasColor($el.value)" style="color: #597175" checked>
+                            <input type="radio" id="mint" name="color" value="mint" x-model="color" x-show="styleHasColor($el.value)" style="color: #a5b2a2">
+                            <input type="radio" id="sky" name="color" value="sky" x-model="color" x-show="styleHasColor($el.value)" style="color: #96acb9">
+                            <input type="radio" id="heather" name="color" value="heather" x-model="color" x-show="styleHasColor($el.value)" style="color: #a4787f">
+                            <input type="radio" id="brown" name="color" value="brown" x-model="color" x-show="styleHasColor($el.value)" style="color: #c47646">
+                            <input type="radio" id="navy" name="color" value="navy" x-model="color" x-show="styleHasColor($el.value)" style="color: #00395f">
+                            <input type="radio" id="rust" name="color" value="rust" x-model="color" x-show="styleHasColor($el.value)" style="color: #aa5342">
+                            <input type="radio" id="mustard" name="color" value="mustard" x-model="color" x-show="styleHasColor($el.value)" style="color: #e49902">
+                            <input type="radio" id="burgundy" name="color" value="burgundy" x-model="color" x-show="styleHasColor($el.value)" style="color: #6d292a">
+                            <input type="radio" id="powder" name="color" value="powder" x-model="color" x-show="styleHasColor($el.value)" style="color: #dfb4a4">
+                        </fieldset>
+                    </div>
+
+                    <div>
+                        <img src="https://via.placeholder.com/800x600" alt="" :src="'img/' + imageSrc + '.png'" class="media-responsive center-block">
+                    </div>
+                </div>
+            </div>
+            
+
+            <hr>
+
+            <section>
+                <h2>
+                    פרטי קשר
+                </h2>
+
+                <div class="grid">
+                    <label for="email">
+                        דוא״ל
+                        <input type="email" name="email" id="email" placeholder="name@example.com" dir="ltr">
+                    </label>
+
+                    <label for="phone">
+                        טלפון
+                        <input type="tel" name="phone" id="phone" placeholder="+972" dir="ltr">
+                    </label>
+                </div>
+
+                <fieldset>
+                    <legend>
+                        לצורך אישור העיצוב לפני הדפסה, איך תעדיפו שנתקשר איתכם?
+                    </legend>
+                    <label for="phone-pref">
+                        <input type="checkbox" id="phone-pref" name="contact" value="email" checked>
+                        טלפון - וואטסאפ
+                    </label>
+                    <label for="email-pref">
+                        <input type="checkbox" id="email-pref" name="contact" value="email" checked>
+                        דוא״ל
+                    </label>
+                    
+                </fieldset>
+
+                <label for="notes">
+                    בקשות/הערות?
+                    <textarea name="notes" id="notes" cols="30" rows="5"></textarea>
+                </label>
+                
+            </section>
+            
+            <button type="submit">הזמנה</button>
+        </form>
+        
+    </main>
+
+
+
+</body>
+</html>

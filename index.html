@@ -61,7 +61,7 @@
             רק הכניסו את כל הפרטים של הבייבי שלכם ואנחנו נדאג לכל השאר.
         </p>
 
-        <form action="">
+        <form id="main-form" action="https://script.google.com/macros/s/AKfycbwDu9rwoAR1UHIqGLIBa_tJ19vqbE8HYUXic0NGJ0LKbuy3g6fs1oio9DRpznR73coL/exec" method="post">
             <div class="grid">
                 
                 <label for="name-he">
@@ -78,15 +78,15 @@
             
 
             <div class="grid">
-                <label for="meeting-time">
+                <label for="birthtime">
                     תאריך ושעת לידה
-                    <input type="datetime-local" id="meeting-time" name="meeting-time" value="2018-06-12T19:30" min="2018-06-07T00:00"
-                        max="2018-06-14T00:00" dir="ltr">
+                    <input type="datetime-local" id="birthtime" name="birthtime" value="" min=""
+                        max="" dir="ltr">
                 </label>
                 
-                <label for="weight">
+                <label for="birthweight">
                     משקל בלידה (ק״ג)
-                    <input type="number" name="weight" id="weight" step="0.01">
+                    <input type="number" name="birthweight" id="birthweight" step="0.001">
                 </label>
 
                 <label for="week">
@@ -199,7 +199,7 @@
                         לצורך אישור העיצוב לפני הדפסה, איך תעדיפו שנתקשר איתכם?
                     </legend>
                     <label for="phone-pref">
-                        <input type="checkbox" id="phone-pref" name="contact" value="email" checked>
+                        <input type="checkbox" id="phone-pref" name="contact" value="phone" checked>
                         טלפון - וואטסאפ
                     </label>
                     <label for="email-pref">
@@ -216,12 +216,30 @@
                 
             </section>
             
-            <button type="submit">הזמנה</button>
+            <button type="submit" id="btn-submit">הזמנה</button>
         </form>
         
     </main>
 
+    <script>
+        (function () {
 
+            var mainForm = document.getElementById("main-form");
+            var submitBtn = document.getElementById("btn-submit");
+            submitBtn.addEventListener("click", function (e) {
+                e.preventDefault();
+                // Send form
+                if (mainForm.requestSubmit) {
+                    mainForm.requestSubmit()
+                } else {
+                    if (mainForm.reportValidity()) mainForm.submit();
+                }
+            }, false);
+
+        })();
+       
+
+    </script>
 
 </body>
 </html>

@@ -146,72 +146,68 @@
                         שם ביה״ח בו נולד הבייבי
                         <input type="text" id="hospital" name="hospital" placeholder="" required>
                     </label>
-            
-                    <hr>
-            
-                    <div x-data='{
-                                style : "rainbow",
-                                color : "teal",
-                                colorStyles : {
-                                    floral: ["brown", "burgundy", "heather", "mint", "powder", "rust", "sky"],
-                                    origami: ["brown", "mint", "mustard", "powder", "sky", "teal"],
-                                    rainbow : ["mint", "navy", "powder", "sky", "teal"],
-                                },
-                                get imageSrc() { 
-                                    if (!this.colorStyles[this.style].includes(this.color)) this.color = this.colorStyles[this.style][0];
-                                    return this.style + "-" + this.color;
-                                },
-                                styleHasColor(val) { return this.colorStyles[this.style].includes(val) }
-                            }'>
-                        <div class="grid">
-                            <div>
-            
-                                <label for="select-style">
-                                    סגנון מועדף לתעודת הלידה
-                                    <select name="select-style" id="select-style" x-model="style">
-                                        <option value="rainbow">Rainbow</option>
-                                        <option value="floral">Floral</option>
-                                        <option value="origami">Origami</option>
-                                    </select>
-                                </label>
-            
-                                <fieldset id="select-color">
-                                    <legend>
-                                        צבע -
-                                        <span x-text="color" style="text-transform: capitalize;"></span>
-                                    </legend>
-                                    <input type="radio" id="teal" name="color" value="teal" x-model="color"
-                                        x-show="styleHasColor($el.value)" style="color: #597175" checked>
-                                    <input type="radio" id="mint" name="color" value="mint" x-model="color"
-                                        x-show="styleHasColor($el.value)" style="color: #a5b2a2">
-                                    <input type="radio" id="sky" name="color" value="sky" x-model="color"
-                                        x-show="styleHasColor($el.value)" style="color: #96acb9">
-                                    <input type="radio" id="heather" name="color" value="heather" x-model="color"
-                                        x-show="styleHasColor($el.value)" style="color: #a4787f">
-                                    <input type="radio" id="brown" name="color" value="brown" x-model="color"
-                                        x-show="styleHasColor($el.value)" style="color: #c47646">
-                                    <input type="radio" id="navy" name="color" value="navy" x-model="color"
-                                        x-show="styleHasColor($el.value)" style="color: #00395f">
-                                    <input type="radio" id="rust" name="color" value="rust" x-model="color"
-                                        x-show="styleHasColor($el.value)" style="color: #aa5342">
-                                    <input type="radio" id="mustard" name="color" value="mustard" x-model="color"
-                                        x-show="styleHasColor($el.value)" style="color: #e49902">
-                                    <input type="radio" id="burgundy" name="color" value="burgundy" x-model="color"
-                                        x-show="styleHasColor($el.value)" style="color: #6d292a">
-                                    <input type="radio" id="powder" name="color" value="powder" x-model="color"
-                                        x-show="styleHasColor($el.value)" style="color: #dfb4a4">
-                                </fieldset>
-                            </div>
-            
-                            <div>
-                                <img alt="" :src="'img/' + imageSrc + '.png'"
-                                    class="media-responsive center-block">
+
+                    <article>
+                        <div x-data='{
+                                                        style : "rainbow",
+                                                        color : "teal",
+                                                        colorStyles : {
+                                                            floral: ["brown", "burgundy", "heather", "mint", "powder", "rust", "sky"],
+                                                            origami: ["brown", "mint", "mustard", "powder", "sky", "teal"],
+                                                            rainbow : ["mint", "navy", "powder", "sky", "teal"],
+                                                        },
+                                                        get imageSrc() { 
+                                                            if (!this.colorStyles[this.style].includes(this.color)) this.color = this.colorStyles[this.style][0];
+                                                            return this.style + "-" + this.color;
+                                                        },
+                                                        styleHasColor(val) { return this.colorStyles[this.style].includes(val) }
+                                                    }'>
+                            <div class="grid">
+                                <div>
+                        
+                                    <label for="select-style">
+                                        סגנון מועדף לתעודת הלידה
+                                        <select name="select-style" id="select-style" x-model="style">
+                                            <option value="rainbow">Rainbow</option>
+                                            <option value="floral">Floral</option>
+                                            <option value="origami">Origami</option>
+                                        </select>
+                                    </label>
+                        
+                                    <fieldset id="select-color">
+                                        <legend>
+                                            צבע -
+                                            <span x-text="color" style="text-transform: capitalize;"></span>
+                                        </legend>
+                                        <input type="radio" id="teal" name="color" value="teal" x-model="color"
+                                            x-show="styleHasColor($el.value)" style="color: #597175" checked>
+                                        <input type="radio" id="mint" name="color" value="mint" x-model="color"
+                                            x-show="styleHasColor($el.value)" style="color: #a5b2a2">
+                                        <input type="radio" id="sky" name="color" value="sky" x-model="color" x-show="styleHasColor($el.value)"
+                                            style="color: #96acb9">
+                                        <input type="radio" id="heather" name="color" value="heather" x-model="color"
+                                            x-show="styleHasColor($el.value)" style="color: #a4787f">
+                                        <input type="radio" id="brown" name="color" value="brown" x-model="color"
+                                            x-show="styleHasColor($el.value)" style="color: #c47646">
+                                        <input type="radio" id="navy" name="color" value="navy" x-model="color"
+                                            x-show="styleHasColor($el.value)" style="color: #00395f">
+                                        <input type="radio" id="rust" name="color" value="rust" x-model="color"
+                                            x-show="styleHasColor($el.value)" style="color: #aa5342">
+                                        <input type="radio" id="mustard" name="color" value="mustard" x-model="color"
+                                            x-show="styleHasColor($el.value)" style="color: #e49902">
+                                        <input type="radio" id="burgundy" name="color" value="burgundy" x-model="color"
+                                            x-show="styleHasColor($el.value)" style="color: #6d292a">
+                                        <input type="radio" id="powder" name="color" value="powder" x-model="color"
+                                            x-show="styleHasColor($el.value)" style="color: #dfb4a4">
+                                    </fieldset>
+                                </div>
+                        
+                                <div>
+                                    <img alt="" :src="'img/' + imageSrc + '.png'" class="media-responsive center-block">
+                                </div>
                             </div>
                         </div>
-                    </div>
-            
-            
-                    <hr>
+                    </article>
             
                     <section>
                         <h2>
@@ -257,15 +253,25 @@
                         <progress indeterminate="true" max="100" x-show="$store.form.phase == 'loading'"></progress>
                     </div>
             
-                    <img src="img/Noam_Room.jpg" alt="A room with a framed designed birth certificate"
-                        class="media-responsive center-block">
+                    <img src="img/Noam_Room.jpg" alt="A room with a framed designed birth certificate" class="media-responsive center-block">
             
                 </fieldset>
             </form>
         </div>
         
         <template x-if="$store.form.phase == 'done'">
-            <div>Contents...</div>
+            <div>
+                <article>
+                    <header>
+                        <strong>
+                            תודה שמילאת את הפרטים!
+                        </strong>
+                    </header>
+                    <p>
+                        בימים הקרובים נשלח לך את התעודה המעוצבת לאישור במייל או בוואטסאפ (לפי הבחירה שסימנת בטופס) והמשלוח ייצא לדרך.
+                    </p>
+                </article>
+            </div>
         </template>
 
     </main>
@@ -276,7 +282,7 @@
         (function () {
 
             document.addEventListener('alpine:init', () => {
-                Alpine.store('form', {'phase': 'active'})
+                Alpine.store('form', {'phase': 'form'})
             })
 
             document.querySelectorAll('input').forEach(el => {

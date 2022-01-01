@@ -43,197 +43,278 @@
 
         [x-cloak] { display: none !important; }
 
+        input.invalid {
+            border-color: red;
+        }
+
+        fieldset[disabled] {
+            opacity: 0.5;
+        }
+
+        .logo-banner {
+            max-height: 10rem;
+        }
+
+        .logo-banner-wrapper {
+            background-color: #a7b1a6;
+        }
+
     </style>
 
 </head>
-<body>
+<body x-data>
+    <div class="logo-banner-wrapper">
+        <img src="/img/liebe-banner.jpg" alt="Liebe logo" class="media-responsive center-block logo-banner">
+    </div>
+
     <main class="container">
-        <h1>
-            טופס פרטים לתעודת לידה
-        </h1>
-        <p>
-            <strong>
-                מזל טוב, קסם חדש נולד!
-            </strong>
-            <br>
-            תעודת לידה מעוצבת בהתאמה אישית לפי טעמכם.
-            <br>
-            רק הכניסו את כל הפרטים של הבייבי שלכם ואנחנו נדאג לכל השאר.
-        </p>
-
-        <form id="main-form" action="https://script.google.com/macros/s/AKfycbwDu9rwoAR1UHIqGLIBa_tJ19vqbE8HYUXic0NGJ0LKbuy3g6fs1oio9DRpznR73coL/exec" method="post">
-            <div class="grid">
-                
-                <label for="name-he">
-                    שם הבייבי (עברית)
-                    <input type="text" id="name-he" name="name-he" placeholder="שם פרטי ומשפחה" required>
-                </label>
-                
-                <label for="name-en">
-                    שם הבייבי (אנגלית)
-                    <input type="text" id="name-en" name="name-en" placeholder="First and Last Name" dir="ltr" required>
-                </label>
-            </div>
-                
-            
-
-            <div class="grid">
-                <label for="birthtime">
-                    תאריך ושעת לידה
-                    <input type="datetime-local" id="birthtime" name="birthtime" value="" min=""
-                        max="" dir="ltr">
-                </label>
-                
-                <label for="birthweight">
-                    משקל בלידה (ק״ג)
-                    <input type="number" name="birthweight" id="birthweight" step="0.001">
-                </label>
-
-                <label for="week">
-                    שבוע הלידה
-                    <input type="text" name="week" id="week">
-                </label>
-            </div>
-
-            <label for="parent1-name">
-                הורה 1
-                <div class="grid">
-                    <input type="text" name="parent1-name" id="parent1-name" placeholder="שם פרטי">
-                    <select name="parent1-gender" id="parent1-gender">
-                        <option value="אמא">אמא</option>
-                        <option value="אבא">אבא</option>
-                    </select>
-                </div>
-            </label>
-
-            <label for="parent2-name">
-                הורה 2
-                <div class="grid">
-                    <input type="text" name="parent2-name" id="parent2-name" placeholder="שם פרטי">
-                    <select name="parent2-gender" id="parent2-gender">
-                        <option value="אמא">אמא</option>
-                        <option value="אבא">אבא</option>
-                    </select>
-                </div>
-            </label>
-
-            <label for="hospital">
-                שם ביה״ח בו נולד הבייבי
-                <input type="text" id="hospital" name="hospital" placeholder="" required>
-            </label>
-
-            <hr>
-
-            <div x-data='{
-                style : "rainbow",
-                color : "teal",
-                colorStyles : {
-                    floral: ["brown", "burgundy", "heather", "mint", "powder", "rust", "sky"],
-                    origami: ["brown", "mint", "mustard", "powder", "sky", "teal"],
-                    rainbow : ["mint", "navy", "powder", "sky", "teal"],
-                },
-                get imageSrc() { 
-                    if (!this.colorStyles[this.style].includes(this.color)) this.color = this.colorStyles[this.style][0];
-                    return this.style + "-" + this.color;
-                },
-                styleHasColor(val) { return this.colorStyles[this.style].includes(val) }
-            }'>
-                <div class="grid">
-                    <div>
-
-                        <label for="select-style">
-                            סגנון מועדף לתעודת הלידה
-                            <select name="select-style" id="select-style" x-model="style">
-                                <option value="rainbow">Rainbow</option>
-                                <option value="floral">Floral</option>
-                                <option value="origami">Origami</option>
-                            </select>
-                        </label>
-                
-                        <fieldset id="select-color">
-                            <legend>
-                                צבע - 
-                                <span x-text="color" style="text-transform: capitalize;"></span>
-                            </legend>
-                            <input type="radio" id="teal" name="color" value="teal" x-model="color" x-show="styleHasColor($el.value)" style="color: #597175" checked>
-                            <input type="radio" id="mint" name="color" value="mint" x-model="color" x-show="styleHasColor($el.value)" style="color: #a5b2a2">
-                            <input type="radio" id="sky" name="color" value="sky" x-model="color" x-show="styleHasColor($el.value)" style="color: #96acb9">
-                            <input type="radio" id="heather" name="color" value="heather" x-model="color" x-show="styleHasColor($el.value)" style="color: #a4787f">
-                            <input type="radio" id="brown" name="color" value="brown" x-model="color" x-show="styleHasColor($el.value)" style="color: #c47646">
-                            <input type="radio" id="navy" name="color" value="navy" x-model="color" x-show="styleHasColor($el.value)" style="color: #00395f">
-                            <input type="radio" id="rust" name="color" value="rust" x-model="color" x-show="styleHasColor($el.value)" style="color: #aa5342">
-                            <input type="radio" id="mustard" name="color" value="mustard" x-model="color" x-show="styleHasColor($el.value)" style="color: #e49902">
-                            <input type="radio" id="burgundy" name="color" value="burgundy" x-model="color" x-show="styleHasColor($el.value)" style="color: #6d292a">
-                            <input type="radio" id="powder" name="color" value="powder" x-model="color" x-show="styleHasColor($el.value)" style="color: #dfb4a4">
-                        </fieldset>
-                    </div>
-
-                    <div>
-                        <img src="https://via.placeholder.com/800x600" alt="" :src="'img/' + imageSrc + '.png'" class="media-responsive center-block">
-                    </div>
-                </div>
-            </div>
-            
-
-            <hr>
-
-            <section>
-                <h2>
-                    פרטי קשר
-                </h2>
-
-                <div class="grid">
-                    <label for="email">
-                        דוא״ל
-                        <input type="email" name="email" id="email" placeholder="name@example.com" dir="ltr">
-                    </label>
-
-                    <label for="phone">
-                        טלפון
-                        <input type="tel" name="phone" id="phone" placeholder="+972" dir="ltr">
-                    </label>
-                </div>
-
-                <fieldset>
-                    <legend>
-                        לצורך אישור העיצוב לפני הדפסה, איך תעדיפו שנתקשר איתכם?
-                    </legend>
-                    <label for="phone-pref">
-                        <input type="checkbox" id="phone-pref" name="contact" value="phone" checked>
-                        טלפון - וואטסאפ
-                    </label>
-                    <label for="email-pref">
-                        <input type="checkbox" id="email-pref" name="contact" value="email" checked>
-                        דוא״ל
-                    </label>
-                    
-                </fieldset>
-
-                <label for="notes">
-                    בקשות/הערות?
-                    <textarea name="notes" id="notes" cols="30" rows="5"></textarea>
-                </label>
-                
-            </section>
-            
-            <button type="submit" id="btn-submit">הזמנה</button>
-        </form>
         
+        <div x-show="$store.form.phase != 'done'">
+            <h1>
+                טופס פרטים לתעודת לידה
+            </h1>
+            <p>
+                <strong>
+                    מזל טוב, קסם חדש נולד!
+                </strong>
+                <br>
+                תעודת לידה מעוצבת בהתאמה אישית לפי טעמכם.
+                <br>
+                רק הכניסו את כל הפרטים של הבייבי שלכם ואנחנו נדאג לכל השאר.
+            </p>
+            
+            <form id="main-form"
+                action="https://script.google.com/macros/s/AKfycbyqegn0X6TS_Mgz12tlQDea2uhxwCv_YvawnMBzeGc1mA70CjqP86yIRooYNplRIOT1/exec"
+                method="post">
+                <fieldset>
+                    <div class="grid">
+            
+                        <label for="name-he">
+                            שם הבייבי (עברית)
+                            <input type="text" id="name-he" name="name-he" placeholder="שם פרטי ומשפחה" required>
+                        </label>
+            
+                        <label for="name-en">
+                            שם הבייבי (אנגלית)
+                            <input type="text" id="name-en" name="name-en" placeholder="First and Last Name" dir="ltr" required>
+                        </label>
+                    </div>
+            
+            
+            
+                    <div class="grid">
+                        <label for="birthtime">
+                            תאריך ושעת לידה
+                            <input type="datetime-local" id="birthtime" name="birthtime" value="" min="" max="" dir="ltr" required>
+                        </label>
+            
+                        <label for="birthweight">
+                            משקל בלידה (ק״ג)
+                            <input type="number" name="birthweight" id="birthweight" step="0.001" required>
+                        </label>
+            
+                        <label for="week">
+                            שבוע הלידה
+                            <input type="text" name="week" id="week" placeholder="למשל 38+4" pattern="\d+\+\d"
+                                data-invalid="אנא ציינו שבוע מדוייק כולל יום, למשל 39+0" required>
+                        </label>
+                    </div>
+            
+                    <label for="parent1-name">
+                        הורה 1
+                        <div class="grid">
+                            <input type="text" name="parent1-name" id="parent1-name" placeholder="שם פרטי" required>
+                            <select name="parent1-gender" id="parent1-gender">
+                                <option value="אמא">אמא</option>
+                                <option value="אבא">אבא</option>
+                            </select>
+                        </div>
+                    </label>
+            
+                    <label for="parent2-name">
+                        הורה 2
+                        <div class="grid">
+                            <input type="text" name="parent2-name" id="parent2-name" placeholder="שם פרטי" required>
+                            <select name="parent2-gender" id="parent2-gender">
+                                <option value="אמא">אמא</option>
+                                <option value="אבא">אבא</option>
+                            </select>
+                        </div>
+                    </label>
+            
+                    <label for="hospital">
+                        שם ביה״ח בו נולד הבייבי
+                        <input type="text" id="hospital" name="hospital" placeholder="" required>
+                    </label>
+            
+                    <hr>
+            
+                    <div x-data='{
+                                style : "rainbow",
+                                color : "teal",
+                                colorStyles : {
+                                    floral: ["brown", "burgundy", "heather", "mint", "powder", "rust", "sky"],
+                                    origami: ["brown", "mint", "mustard", "powder", "sky", "teal"],
+                                    rainbow : ["mint", "navy", "powder", "sky", "teal"],
+                                },
+                                get imageSrc() { 
+                                    if (!this.colorStyles[this.style].includes(this.color)) this.color = this.colorStyles[this.style][0];
+                                    return this.style + "-" + this.color;
+                                },
+                                styleHasColor(val) { return this.colorStyles[this.style].includes(val) }
+                            }'>
+                        <div class="grid">
+                            <div>
+            
+                                <label for="select-style">
+                                    סגנון מועדף לתעודת הלידה
+                                    <select name="select-style" id="select-style" x-model="style">
+                                        <option value="rainbow">Rainbow</option>
+                                        <option value="floral">Floral</option>
+                                        <option value="origami">Origami</option>
+                                    </select>
+                                </label>
+            
+                                <fieldset id="select-color">
+                                    <legend>
+                                        צבע -
+                                        <span x-text="color" style="text-transform: capitalize;"></span>
+                                    </legend>
+                                    <input type="radio" id="teal" name="color" value="teal" x-model="color"
+                                        x-show="styleHasColor($el.value)" style="color: #597175" checked>
+                                    <input type="radio" id="mint" name="color" value="mint" x-model="color"
+                                        x-show="styleHasColor($el.value)" style="color: #a5b2a2">
+                                    <input type="radio" id="sky" name="color" value="sky" x-model="color"
+                                        x-show="styleHasColor($el.value)" style="color: #96acb9">
+                                    <input type="radio" id="heather" name="color" value="heather" x-model="color"
+                                        x-show="styleHasColor($el.value)" style="color: #a4787f">
+                                    <input type="radio" id="brown" name="color" value="brown" x-model="color"
+                                        x-show="styleHasColor($el.value)" style="color: #c47646">
+                                    <input type="radio" id="navy" name="color" value="navy" x-model="color"
+                                        x-show="styleHasColor($el.value)" style="color: #00395f">
+                                    <input type="radio" id="rust" name="color" value="rust" x-model="color"
+                                        x-show="styleHasColor($el.value)" style="color: #aa5342">
+                                    <input type="radio" id="mustard" name="color" value="mustard" x-model="color"
+                                        x-show="styleHasColor($el.value)" style="color: #e49902">
+                                    <input type="radio" id="burgundy" name="color" value="burgundy" x-model="color"
+                                        x-show="styleHasColor($el.value)" style="color: #6d292a">
+                                    <input type="radio" id="powder" name="color" value="powder" x-model="color"
+                                        x-show="styleHasColor($el.value)" style="color: #dfb4a4">
+                                </fieldset>
+                            </div>
+            
+                            <div>
+                                <img src="https://via.placeholder.com/800x600" alt="" :src="'img/' + imageSrc + '.png'"
+                                    class="media-responsive center-block">
+                            </div>
+                        </div>
+                    </div>
+            
+            
+                    <hr>
+            
+                    <section>
+                        <h2>
+                            פרטי קשר
+                        </h2>
+            
+                        <div class="grid">
+                            <label for="email">
+                                דוא״ל
+                                <input type="email" name="email" id="email" placeholder="name@example.com" dir="ltr" required>
+                            </label>
+            
+                            <label for="phone">
+                                טלפון
+                                <input type="tel" name="phone" id="phone" placeholder="+972" dir="ltr" required>
+                            </label>
+                        </div>
+            
+                        <fieldset>
+                            <legend>
+                                לצורך אישור העיצוב לפני הדפסה, איך תעדיפו שנתקשר איתכם?
+                            </legend>
+                            <label for="contact-phone">
+                                <input type="checkbox" id="contact-phone" name="contact-phone" checked>
+                                טלפון - וואטסאפ
+                            </label>
+                            <label for="contact-email">
+                                <input type="checkbox" id="contact-email" name="contact-email" checked>
+                                דוא״ל
+                            </label>
+            
+                        </fieldset>
+            
+                        <label for="notes">
+                            בקשות/הערות?
+                            <textarea name="notes" id="notes" cols="30" rows="5"></textarea>
+                        </label>
+            
+                    </section>
+            
+                    <div x-data>
+                        <button type="submit" id="btn-submit">הזמנה</button>
+                        <progress indeterminate="true" max="100" x-show="$store.form.phase == 'loading'"></progress>
+                    </div>
+            
+                    <img src="/img/Noam_Room.jpg" alt="A room with a framed designed birth certificate"
+                        class="media-responsive center-block">
+            
+                </fieldset>
+            </form>
+        </div>
+        
+        <template x-if="$store.form.phase == 'done'">
+            <div>Contents...</div>
+        </template>
+
     </main>
+
+    
 
     <script>
         (function () {
 
+            document.addEventListener('alpine:init', () => {
+                Alpine.store('form', {'phase': 'active'})
+            })
+
+            document.querySelectorAll('input').forEach(el => {
+                el.addEventListener("invalid", function (e) {
+                    if (e.target.hasAttribute('data-invalid')) e.target.setCustomValidity(e.target.getAttribute('data-invalid'));
+                    e.target.classList.add("invalid");
+                });
+                el.addEventListener("change", function (e) {
+                    e.target.setCustomValidity('');
+                    e.target.classList.remove("invalid");
+                });
+            })
+            
             var mainForm = document.getElementById("main-form");
             var submitBtn = document.getElementById("btn-submit");
             submitBtn.addEventListener("click", function (e) {
                 e.preventDefault();
                 // Send form
-                if (mainForm.requestSubmit) {
-                    mainForm.requestSubmit()
-                } else {
-                    if (mainForm.reportValidity()) mainForm.submit();
-                }
+                    if (mainForm.reportValidity()) {
+                        let formData = new FormData(mainForm);
+                        mainForm.firstElementChild.setAttribute("disabled", "disabled");
+                        submitBtn.setAttribute("disabled", "disabled");
+                        // mainForm.submit();
+
+                        // Submit
+                        Alpine.store('form').phase = 'loading';
+                        let xhr = new XMLHttpRequest();
+                        xhr.addEventListener("error", function (event) {
+                            alert('אופס! אירעה תקלה, אנא נסו שוב.');
+                            window.location.href = window.location.href;
+                        });
+                        xhr.addEventListener("load", function (event) {
+                            Alpine.store('form').phase = 'done';
+                        });
+                        xhr.open(mainForm.method.toUpperCase(), mainForm.action);
+                        // xhr.send(new URLSearchParams(formData).toString());
+                        xhr.send(formData);
+                    }
             }, false);
 
         })();

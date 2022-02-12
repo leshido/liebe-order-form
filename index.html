@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="he-IL" data-theme="light" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -103,11 +104,6 @@
             
             
                     <div class="grid">
-                        <label for="birthtime">
-                            תאריך ושעת לידה
-                            <input type="datetime-local" id="birthtime" name="birthtime" value="" min="" max="" dir="ltr" required>
-                        </label>
-            
                         <label for="birthweight">
                             משקל בלידה (ק״ג)
                             <input type="number" name="birthweight" id="birthweight" step="0.001" required>
@@ -117,6 +113,49 @@
                             שבוע הלידה
                             <input type="text" name="week" id="week" placeholder="למשל 38+4" pattern="\d+\+\d"
                                 data-invalid="אנא ציינו שבוע מדוייק כולל יום, למשל 39+0" required>
+                        </label>
+
+                        <label for="baby-gender">
+                            מין
+                            <select name="baby-gender" id="baby-gender">
+                                <option value="undisclosed">בן/בת</option>
+                                <option value="בן">בן</option>
+                                <option value="בת">בת</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <div class="grid" x-data="{
+                        birthTime: '',
+                        get zodiac() {
+                            if (this.birthTime == '') return 0;
+                            return Number(new Intl.DateTimeFormat('fr-TN-u-ca-persian', {month: 'numeric'}).format( new Date(this.birthTime) )) - 1
+                        },
+                        get zodiacValue() {
+                            return document.getElementById('zodiac').options[this.zodiac].value;
+                        }
+                    }">
+                        <label for="birthtime">
+                            תאריך ושעת לידה
+                            <input type="datetime-local" id="birthtime" x-ref="birthtime" @change="birthTime = $el.value" name="birthtime" value="" min="" max="" dir="ltr" required>
+                        </label>
+                        
+                        <label for="zodiac">
+                            מזל אסטרולוגי
+                            <select name="zodiac" id="zodiac" x-bind:value="zodiacValue">
+                                <option value="טלה">טלה</option>
+                                <option value="שור">שור</option>
+                                <option value="תאומים">תאומים</option>
+                                <option value="סרטן">סרטן</option>
+                                <option value="אריה">אריה</option>
+                                <option value="בתולה">בתולה</option>
+                                <option value="מאזניים">מאזניים</option>
+                                <option value="עקרב">עקרב</option>
+                                <option value="קשת">קשת</option>
+                                <option value="גדי">גדי</option>
+                                <option value="דלי">דלי</option>
+                                <option value="דגים">דגים</option>
+                            </select>
                         </label>
                     </div>
             

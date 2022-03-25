@@ -12,15 +12,15 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 	<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;700&display=swap" rel="stylesheet" />
-    
+
 	<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    
-    <link rel="stylesheet" href="css/style.css">
+
+	<link rel="stylesheet" href="css/style.css">
 </head>
 
 <body x-data>
 	<div class="logo-banner-wrapper">
-		<img src="img/liebe-banner.jpg" alt="Liebe logo" class="media-responsive center-block logo-banner" />
+		<img src="img/liebe-tammuz-banner.jpg" alt="Liebe logo" class="media-responsive center-block logo-banner" />
 	</div>
 
 	<main class="container">
@@ -182,42 +182,58 @@
 					</article>
 
 					<section>
-						<h2>פרטי קשר</h2>
-
+						<h2>
+							כתובת למשלוח
+						</h2>
+					
 						<div class="grid">
-							<label for="email">
-								דוא״ל
-								<input type="email" name="email" id="email" placeholder="name@example.com" dir="ltr" required />
+							<label for="contact-name">
+								איש קשר
+								<input type="text" name="contact-name" id="contact-name" placeholder="שם מלא" required>
 							</label>
-
+					
 							<label for="phone">
 								טלפון
-								<input type="tel" name="phone" id="phone" placeholder="+972" dir="ltr" required />
+								<input type="tel" name="phone" id="phone" placeholder="+972" dir="ltr" required>
 							</label>
 						</div>
-
-						<fieldset>
-							<legend>
-								לצורך אישור העיצוב לפני הדפסה, איך תעדיפו שנתקשר איתכם?
-							</legend>
-							<label for="contact-phone">
-								<input type="checkbox" id="contact-phone" name="contact-phone" checked />
-								טלפון - וואטסאפ
+					
+						<div class="grid">
+							<label for="address-city">
+								עיר
+								<input type="text" name="address-city" id="address-city" required>
 							</label>
-							<label for="contact-email">
-								<input type="checkbox" id="contact-email" name="contact-email" checked />
-								דוא״ל
+					
+							<label for="address-street">
+								רחוב
+								<input type="text" name="address-street" id="address-street" required>
 							</label>
-						</fieldset>
-
-						<label for="notes">
-							בקשות/הערות?
-							<textarea name="notes" id="notes" cols="30" rows="5"></textarea>
-						</label>
+					
+							<div class="grid grid-no-responsive">
+								<label for="address-house">
+									מספר בית
+									<input type="text" name="address-house" id="address-house" required>
+								</label>
+					
+								<label for="address-apt">
+									דירה
+									<input type="text" name="address-apt" id="address-apt" required>
+								</label>
+					
+								<label for="address-floor">
+									קומה
+									<input type="text" name="address-floor" id="address-floor" required>
+								</label>
+					
+							</div>
+					
+						</div>
+					
 					</section>
 
 					<div x-data>
 						<button type="submit" id="btn-submit">הזמנה</button>
+						<input type="hidden" name="rel" id="rel" value="tammuz">
 						<progress indeterminate="true" max="100" x-show="$store.form.phase == 'loading'"></progress>
 					</div>
 
@@ -242,7 +258,7 @@
 	</main>
 
 	<script>
-		(function() {
+		(function () {
 			document.addEventListener("alpine:init", () => {
 				Alpine.store("form", {
 					phase: "form"
@@ -250,12 +266,12 @@
 			});
 
 			document.querySelectorAll("input").forEach((el) => {
-				el.addEventListener("invalid", function(e) {
+				el.addEventListener("invalid", function (e) {
 					if (e.target.hasAttribute("data-invalid"))
 						e.target.setCustomValidity(e.target.getAttribute("data-invalid"));
 					e.target.classList.add("invalid");
 				});
-				el.addEventListener("change", function(e) {
+				el.addEventListener("change", function (e) {
 					e.target.setCustomValidity("");
 					e.target.classList.remove("invalid");
 				});
@@ -265,7 +281,7 @@
 			var submitBtn = document.getElementById("btn-submit");
 			submitBtn.addEventListener(
 				"click",
-				function(e) {
+				function (e) {
 					e.preventDefault();
 					// Send form
 					if (mainForm.reportValidity()) {
@@ -277,11 +293,11 @@
 						// Submit
 						Alpine.store("form").phase = "loading";
 						let xhr = new XMLHttpRequest();
-						xhr.addEventListener("error", function(event) {
+						xhr.addEventListener("error", function (event) {
 							alert("אופס! אירעה תקלה, אנא נסו שוב.");
 							window.location.href = window.location.href;
 						});
-						xhr.addEventListener("load", function(event) {
+						xhr.addEventListener("load", function (event) {
 							Alpine.store("form").phase = "done";
 						});
 						xhr.open(mainForm.method.toUpperCase(), mainForm.action);

@@ -138,10 +138,16 @@
 								floral: ["brown", "burgundy", "heather", "mint", "powder", "rust", "sky"],
 								origami: ["brown", "mint", "mustard", "powder", "sky", "teal"],
 								rainbow : ["mint", "navy", "powder", "sky", "teal"],
+								jungle : ["tiger", "sloth", "giraffe", "zebra"],
+								woodland : ["deer", "fox", "bamby"],
+								sealife : ["whale", "seahorse", "manta ray"],
 							},
 							get imageSrc() { 
 								if (!this.colorStyles[this.style].includes(this.color)) this.color = this.colorStyles[this.style][0];
 								return this.style + "-" + this.color + (this.style == "floral" ? ".jpg" : ".png");
+							},
+							get legendTitle() {
+								return ["jungle", "woodland", "sealife"].indexOf(this.style) >= 0 ? "דגם" : "צבע" ;
 							},
 							styleHasColor(val) { return this.colorStyles[this.style].includes(val) }
 						}'>
@@ -153,12 +159,15 @@
 											<option value="rainbow">Rainbow</option>
 											<option value="floral">Floral</option>
 											<option value="origami">Origami</option>
+											<option value="jungle">Jungle</option>
+											<option value="woodland">Woodland</option>
+											<option value="sealife">Sea Life</option>
 										</select>
 									</label>
 
 									<fieldset id="select-color">
 										<legend>
-											צבע -
+											<span x-text="legendTitle"></span> -
 											<span x-text="color" style="text-transform: capitalize"></span>
 										</legend>
 										<input type="radio" id="teal" name="color" value="teal" x-model="color" x-show="styleHasColor($el.value)" style="color: #597175" checked />
@@ -171,6 +180,19 @@
 										<input type="radio" id="mustard" name="color" value="mustard" x-model="color" x-show="styleHasColor($el.value)" style="color: #e49902" />
 										<input type="radio" id="burgundy" name="color" value="burgundy" x-model="color" x-show="styleHasColor($el.value)" style="color: #6d292a" />
 										<input type="radio" id="powder" name="color" value="powder" x-model="color" x-show="styleHasColor($el.value)" style="color: #dfb4a4" />
+
+										<input type="radio" id="tiger" name="color" value="tiger" x-model="color" x-show="styleHasColor($el.value)" style="color: #C69055" />
+										<input type="radio" id="giraffe" name="color" value="giraffe" x-model="color" x-show="styleHasColor($el.value)" style="color: #974426" />
+										<input type="radio" id="sloth" name="color" value="sloth" x-model="color" x-show="styleHasColor($el.value)" style="color: #5A4425" />
+										<input type="radio" id="zebra" name="color" value="zebra" x-model="color" x-show="styleHasColor($el.value)" style="color: #527756" />
+										
+										<input type="radio" id="deer" name="color" value="deer" x-model="color" x-show="styleHasColor($el.value)" style="color: #5A4225" />
+										<input type="radio" id="fox" name="color" value="fox" x-model="color" x-show="styleHasColor($el.value)" style="color: #964325" />
+										<input type="radio" id="bamby" name="color" value="bamby" x-model="color" x-show="styleHasColor($el.value)" style="color: #507856" />
+										
+										<input type="radio" id="whale" name="color" value="whale" x-model="color" x-show="styleHasColor($el.value)" style="color: #ABD4D6" />
+										<input type="radio" id="seahorse" name="color" value="seahorse" x-model="color" x-show="styleHasColor($el.value)" style="color: #C6CDC4" />
+										<input type="radio" id="mantaray" name="color" value="manta ray" x-model="color" x-show="styleHasColor($el.value)" style="color: #E0C6BF" />
 									</fieldset>
 								</div>
 
